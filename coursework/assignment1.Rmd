@@ -1,0 +1,477 @@
+---
+title: "DATA202/472 - Assignment 1"
+author: "Viraj Gandhi - [ID removed for public portfolio]"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+# Question 1
+
+Question 1 a)
+
+The level of excitement of the crowd on a 5-point Likert scale is a
+categorical qualitative variable. It is ordered or ordinal because the
+ratings have a clear order. For example, a rating of 5 means more
+excitement than a rating of 4.
+
+R class: ordered factor R type: integer
+
+b)  
+
+The team or country qualifying for the Quarter Finals is a categorical
+qualitative variable. It is unordered or nominal because the countries
+do not have a natural order.
+
+R class: factor R type: integer
+
+c)  
+
+The outcome of a penalty kick is a categorical qualitative variable. It
+is logical because there are two possible outcomes, such as scored or
+not scored.
+
+R class: logical R type: logical
+
+d)  
+
+The average distance travelled by players is a numerical continuous
+variable. It is continuous because the distance can contain decimal
+values.
+
+R class: numeric R type: double
+
+e)  
+
+The number of teams participating is a numerical discrete variable. It
+is discrete because the number of teams is counted using whole numbers.
+There cannot be part of a team participating.
+
+R class: integer R type: integer
+
+# Question 2
+
+First, create the objects `x` and `y`.
+
+```{r q2-setup}
+x <- c(
+  "New Zealand" = 4,
+  "England" = 7,
+  "The Netherlands" = 3,
+  "France" = 4
+)
+
+y <- c(3, 5, 8, 7, 7, 4)
+```
+
+## Question 2(a)
+
+```{r q2-a}
+x[c(4, 2, 1)]
+```
+
+This code is asking R to get the values from `x` in the order of the
+positions 4, 2 and 1. R first gets the fourth position, which is France
+with a value of 4. It then gets the second position, which is England
+with a value of 7, and then the first position, which is New Zealand
+with a value of 4. In simple terms, the numbers inside the square
+brackets tell R which positions to select and the order to return them
+in.
+
+## Question 2(b)
+
+```{r q2-b}
+x[x == 4 | x == 7]
+```
+
+This code is asking whether each value in `x` is equal to 4 or equal to
+7. The `|` symbol means “or”. R checks every value in `x` and keeps the
+teams whose values are either 4 or 7. The output therefore gives New
+Zealand with 4, England with 7 and France with 4.
+
+## Question 2(c)
+
+```{r q2-c}
+x[!(x > 3)]
+```
+
+First, `x > 3` checks whether each value in `x` is greater than 3. The
+`!` symbol means “not”, so it reverses the results. This means the code
+selects values that are not greater than 3. The final output is The
+Netherlands with a value of 3.
+
+## Question 2(d)
+
+```{r q2-d}
+y[y == x[1]]
+```
+
+First, R finds the value stored in the first position of `x`. The first
+position is New Zealand, which has the value 4. R then checks every
+value in `y` to see which ones are equal to 4. Since `y` contains one
+value equal to 4, the final output is 4. For example, if the code used
+`x[2]`, R would look for values in `y` equal to 7, so the output would
+be 7 and 7.
+
+## Question 2(e)
+
+```{r q2-e}
+y(y == x[3])
+```
+
+This code gives an error because parentheses `()` are used when calling
+a function. R therefore tries to use `y` as if it were a function, but
+`y` is a vector. Square brackets `[]` are used to select elements from a
+vector. The code is meant to demonstrate this error, so it should not be
+corrected inside this question.
+
+# Question 3
+
+## Question 3(a)
+
+```{r q3-a}
+a <- c(4, 3, 3)
+
+z <- matrix(
+  c(5, 1, 3, 0, 2, 3),
+  nrow = 2
+)
+
+a
+z
+```
+
+The object `a` is created using `c()` because the question asks for it
+to be a simple vector and not a one-row array. The object `z` is created
+as a matrix with two rows. R fills a matrix one column at a time, so the
+values create the required matrix:
+
+## Question 3(b)
+
+```{r q3-b}
+g <- z[, 2:3]
+g
+```
+
+This code stores the second and third columns of `z` in a new matrix
+called `g`. The blank space before the comma means to select all rows.
+The `2:3` after the comma means to select columns 2 through 3.
+
+## Question 3(c)
+
+```{r q3-c}
+t(g)
+```
+
+The function `t()` finds the transpose of `g`. A transpose changes the
+rows into columns and the columns into rows.
+
+## Question 3(d)
+
+```{r q3-d}
+solve(g)
+```
+
+The function `solve()` finds the inverse of the matrix `g`. This works
+because `g` is a square matrix and its determinant is not zero.
+
+# Question 4
+
+## `x = y`
+
+The statement `x = y` assigns the values of `y` to `x`. R takes the
+vector on the right-hand side, which is `y`, and stores its values in
+the variable on the left-hand side, which is `x`. The values stored in
+`y` do not change.
+
+## `x == y`
+
+The statement `x == y` does not assign anything. It compares `x` and `y`
+position by position. R returns `TRUE` when the values in the same
+position are equal and `FALSE` when they are not equal. Because `x` and
+`y` are vectors of length 3, the output will also contain three logical
+values.
+
+## `x <- y`
+
+The statement `x <- y` assigns the values of `y` to `x`. In this
+situation, it does the same thing as `x = y`. However, `<-` is normally
+used in R when creating or changing a variable because it makes it
+clearer that an assignment is happening.
+
+## `x < (-y)`
+
+R first calculates `-y`. This changes the sign of every value in `y`, so
+positive values become negative and negative values become positive. R
+then compares `x` and `-y` position by position. It checks whether each
+value of `x` is less than the value in the same position of `-y` and
+returns `TRUE` or `FALSE` for each comparison.
+
+# Question 5
+
+## Question 5(a)
+
+**Error and explanation:**\
+The error is that R uses `>=` for “greater than or equal to”, not `=>`.
+The greater-than symbol must come before the equals symbol.
+
+```{r q5-a}
+x <- c(5, 2, 8, 1)
+x[x >= 5]
+```
+
+The corrected code checks which values in `x` are greater than or equal
+to 5 and then uses square brackets to return those values. The output is
+5 and 8.
+
+## Question 5(b)
+
+**Error and explanation:**\
+The code `x[2]` does not mean the second column. When only one number is
+used inside the square brackets of a matrix, R treats the matrix like
+one long vector and selects the second element. To select a column, a
+comma is needed to separate rows and columns. The blank space before the
+comma means to keep every row, and the 2 after the comma means to select
+the second column.
+
+```{r q5-b}
+x <- matrix(1:9, nrow = 3)
+
+second_column <- x[, 2]
+second_column
+```
+
+## Question 5(c)
+
+**Error and explanation:**\
+The code `x != NA` does not work because `NA` means that a value is
+missing or unknown. R cannot decide whether an unknown value is equal or
+not equal to something, so the comparison returns `NA`. The function
+`is.na(x)` checks which values are missing. The `!` means “not”, so
+`!is.na(x)` finds the values that are not missing.
+
+```{r q5-c}
+x <- c(3, NA, 5)
+x[!is.na(x)]
+```
+
+The final output is 3 and 5.
+
+## Question 5(d)
+
+**Error and explanation:**\
+The code does not return 3, 5 and 8 because factors are stored
+internally using integer codes for their levels. When `as.numeric()` is
+applied directly to the factor, R returns the internal codes 1, 2 and 3
+instead of the values shown by the factor. The factor must first be
+changed into character values and then changed into numerical values.
+
+```{r q5-d}
+x <- factor(c("3", "5", "8"))
+as.numeric(as.character(x))
+```
+
+## Question 5(e)
+
+```{r q5-e-given}
+x <- c(TRUE, FALSE, TRUE, FALSE)
+y <- c(TRUE, TRUE, FALSE, FALSE)
+
+(x & y) == !(!x & !y)
+```
+
+The left side uses `x & y`, which means that both `x` and `y` must be
+`TRUE`. However, the right side `!(!x & !y)` is equivalent to `x | y`,
+which means that either `x` or `y` can be `TRUE`. Since AND and OR do
+not always give the same answer, the comparison does not return all
+`TRUE`.
+
+To fix the equivalence by replacing one character, change the first `&`
+into `|`.
+
+```{r q5-e-corrected}
+(x | y) == !(!x & !y)
+```
+# Question 6
+
+First, create the array supplied in the question:
+
+```{r q6-array}
+x_array <- array(1:10)
+x_array
+```
+
+## Question 6(a)
+
+```{r q6-function}
+odd.even <- function(x) {
+  if (x %% 2 == 0) {
+    return("even")
+  } else {
+    return("odd")
+  }
+}
+```
+
+This creates a function called `odd.even()` with one numerical input
+called `x`. The operator `%%` finds the remainder after division. The
+condition `x %% 2 == 0` checks whether the remainder after dividing `x`
+by 2 is equal to 0. If the remainder is 0, the number is even, so the
+function returns `"even"`. Otherwise, the number is odd, so the function
+returns `"odd"`.
+
+## Question 6(b)
+
+```{r q6-single}
+odd.even(x_array[3])
+```
+
+The expression `x_array[3]` selects the third value from the array,
+which is 3. The function then checks whether 3 is odd or even. Since 3
+has a remainder of 1 when divided by 2, the function returns `"odd"`.
+
+## Question 6(c)
+
+```{r q6-whole-array}
+sapply(x_array, odd.even)
+```
+
+The function `sapply()` applies `odd.even()` to every value in
+`x_array`. It checks each number from 1 to 10 and returns `"odd"` or
+`"even"` for each value. This is written as a single line of R code, as
+required by the question.
+
+# Question 7
+
+## Question 7(a)
+
+First, read the dinosaur dataset:
+
+```{r q7-a}
+dinos <- read.csv("dinosaurs.csv")
+
+dinos <- dinos[dinos$lng <= 180, ]
+```
+
+This keeps only the rows where `lng` is less than or equal to 180 and
+removes the incorrect longitude greater than 180.
+
+## Question 7(b)
+
+First, create `type_factor` using the levels provided in the question:
+
+```{r q7-b}
+dinos$type_factor <- factor(
+  dinos$type,
+  levels = c(
+    "armored dinosaur",
+    "ceratopsian",
+    "large theropod",
+    "ornithopod",
+    "sauropod",
+    "small theropod"
+  )
+)
+
+sum(!is.na(dinos$type_factor))
+```
+
+There are **3595 rows** where `type_factor` is not `NA`.
+
+## Question 7(c)
+
+The following code removes all rows where `type_factor` is `NA`:
+
+```{r q7-c}
+dinos <- dinos[!is.na(dinos$type_factor), ]
+```
+
+The `is.na()` function identifies the missing values and `!` reverses
+the condition so that only rows with values that are not missing are
+kept.
+
+## Question 7(d)
+
+The following code reproduces the cleaned graph:
+
+```{r q7-map}
+# Load required libraries
+library(ggplot2)
+library(maps)
+
+# Create the world map data
+world <- map_data("world")
+
+# Read the dinosaur dataset
+dinos <- read.csv("dinosaurs.csv")
+
+# Create the dinosaur type factor
+dinos$type_factor <- factor(
+  dinos$type,
+  levels = c(
+    "armored dinosaur",
+    "ceratopsian",
+    "large theropod",
+    "ornithopod",
+    "sauropod",
+    "small theropod"
+  )
+)
+
+########## 1st COMMENT LINE - Insert code below this line
+
+dinos <- dinos[dinos$lng <= 180, ]
+
+dinos <- dinos[!is.na(dinos$type_factor), ]
+
+########## 2nd COMMENT LINE - Insert code above this line
+
+ggplot() +
+  geom_polygon(
+    data = world,
+    aes(x = long, y = lat, group = group),
+    fill = "grey90",
+    colour = "grey50"
+  ) +
+  geom_point(
+    data = dinos,
+    aes(x = lng, y = lat, colour = type_factor)
+  ) +
+  coord_fixed(1.3) +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  labs(colour = "Type")
+```
+
+The new graph no longer contains the incorrect point with a longitude
+greater than 180. The `NA` category is also no longer displayed because
+rows where `type_factor` was `NA` were removed.
+
+## Question 7(e)
+
+The following code creates a subset of `dinos` containing only rows
+where `diet` is not an empty string:
+
+```{r q7-e}
+dinos_diet <- dinos[dinos$diet != "", ]
+```
+
+## Question 7(f)
+
+The following code creates a barplot showing the number of dinosaurs in
+each diet category:
+
+```{r q7-f}
+barplot(
+  table(dinos_diet$diet),
+  main = "Number of Dinosaurs in Each Diet Category",
+  xlab = "Diet",
+  ylab = "Number of Dinosaurs"
+)
+```
+
+The barplot shows that herbivorous dinosaurs are the most common diet
+category, followed by carnivorous dinosaurs. Omnivorous dinosaurs are
+the least common category.
