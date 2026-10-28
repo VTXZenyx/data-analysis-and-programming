@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ancient Egypt isotope analysis | Viraj Gandhi</title><link rel="stylesheet" href="../../assets/style.css"></head><body><nav><div class="wrap"><strong>VG / DATA</strong><div><a href="../../index.html">All projects</a><a href="../../README.md">GitHub README</a></div></div></nav><main class="project-main"><header class="project-head"><a class="back" href="../../index.html">← All projects</a><div class="eyebrow" style="margin-top:29px">Assignment 2 · Excel, joins and visualisation</div><h1>Ancient Egypt isotope analysis</h1><p class="lead">Explored 75 archaeological enamel samples to compare strontium isotope ratios across groups. I imported Excel worksheets, joined measurements to context, and reported grouped summaries.</p><div class="tools"><span class="pill">R</span><span class="pill">readxl</span><span class="pill">dplyr</span><span class="pill">ggplot2</span></div></header><div class="actions"><a class="action" href="isotope_analysis.R">View project code ↗</a><a class="action alt" href="../../source/assignment2.Rmd">Original R Markdown ↗</a><a class="action alt" href="README.md">Technical notes ↗</a></div><figure><img src="images/isotope_by_sex.png" alt="Isotope comparison by sex"><figcaption>Isotope comparison by sex</figcaption></figure><figure><img src="images/isotope_rank.png" alt="Isotope measurements by rank"><figcaption>Isotope measurements by rank</figcaption></figure><section class="details"><h2>What this demonstrates</h2><ul><li>Combined measurements and archaeological records using identifiers.</li><li>Cleaned ambiguous category codes for comparisons.</li><li>Explored differences without claiming causal conclusions.</li></ul></section><h2>Code preview</h2><p>First 34 lines shown. Open the full script above for everything.</p><pre class="codepreview"><code># Ancient Egypt strontium isotope data analysis
+# Extracted from my DATA202 Assignment 2, Questions 1 &amp; 2.
+# Requires EgyptData.xlsx with the original sheet names in this folder.
+# From inside this project folder, run: source(&quot;isotope_analysis.R&quot;)
+
+library(dplyr)
+library(ggplot2)
+library(readxl)
+
+filename &lt;- &quot;EgyptData.xlsx&quot;
+
+sheet_names &lt;- excel_sheets(filename)
+sheet_names
+
+mineral_measures &lt;- read_excel(
+  filename,
+  sheet = &quot;mineral_measures&quot;
+)
+
+materials &lt;- read_excel(
+  filename,
+  sheet = &quot;materials&quot;
+)
+
+hyksos &lt;- full_join(
+  materials,
+  mineral_measures,
+  by = c(&quot;material_id&quot; = &quot;sample_id&quot;)
+)
+
+df &lt;- hyksos %&gt;%
+  select(
+    relative_dating_upper_limit,
+    biological_sex,</code></pre><p class="warning">The images are from my submitted coursework HTML report; grades are reported by the student.</p></main><footer><div class="wrap"><a href="../../index.html">← Return to all five projects</a></div></footer></body></html>

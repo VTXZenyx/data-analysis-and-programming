@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dinosaur fossil explorer | Viraj Gandhi</title><link rel="stylesheet" href="../../assets/style.css"></head><body><nav><div class="wrap"><strong>VG / DATA</strong><div><a href="../../index.html">All projects</a><a href="../../README.md">GitHub README</a></div></div></nav><main class="project-main"><header class="project-head"><a class="back" href="../../index.html">← All projects</a><div class="eyebrow" style="margin-top:29px">Assignment 1 · R, data cleaning and mapping</div><h1>Dinosaur fossil explorer</h1><p class="lead">From a dataset of 4,951 dinosaur fossil records, I filtered coordinates and dinosaur types to build a worldwide map and a diet-frequency chart.</p><div class="tools"><span class="pill">R</span><span class="pill">ggplot2</span><span class="pill">Maps</span><span class="pill">Data cleaning</span></div></header><div class="actions"><a class="action" href="dinosaur_analysis.R">View project code ↗</a><a class="action alt" href="../../source/assignment1.Rmd">Original R Markdown ↗</a><a class="action alt" href="README.md">Technical notes ↗</a></div><figure><img src="images/fossil_map.png" alt="Mapped fossil locations"><figcaption>Mapped fossil locations</figcaption></figure><figure><img src="images/diet_counts.png" alt="Diet categories"><figcaption>Diet categories</figcaption></figure><section class="details"><h2>What this demonstrates</h2><ul><li>Converted a categorical variable into a controlled factor for legend order.</li><li>Filtered records and visualised locations on a world map.</li><li>Summarised dinosaur diet categories.</li></ul></section><h2>Code preview</h2><p>First 34 lines shown. Open the full script above for everything.</p><pre class="codepreview"><code># Dinosaur fossils: map and diet summary
+# Extracted from my DATA202 Assignment 1, Question 7.
+# Requires dinosaurs.csv in this folder, ggplot2 and maps.
+# From inside this project folder, run: source(&quot;dinosaur_analysis.R&quot;)
+
+# Load required libraries
+library(ggplot2)
+library(maps)
+
+# Create the world map data
+world &lt;- map_data(&quot;world&quot;)
+
+# Read the dinosaur dataset
+dinos &lt;- read.csv(&quot;dinosaurs.csv&quot;)
+
+# Create the dinosaur type factor
+dinos$type_factor &lt;- factor(
+  dinos$type,
+  levels = c(
+    &quot;armored dinosaur&quot;,
+    &quot;ceratopsian&quot;,
+    &quot;large theropod&quot;,
+    &quot;ornithopod&quot;,
+    &quot;sauropod&quot;,
+    &quot;small theropod&quot;
+  )
+)
+
+########## 1st COMMENT LINE - Insert code below this line
+
+dinos &lt;- dinos[dinos$lng &lt;= 180, ]
+
+dinos &lt;- dinos[!is.na(dinos$type_factor), ]
+</code></pre><p class="warning">The images are from my submitted coursework HTML report; grades are reported by the student.</p></main><footer><div class="wrap"><a href="../../index.html">← Return to all five projects</a></div></footer></body></html>

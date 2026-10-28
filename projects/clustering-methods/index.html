@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Clustering comparison lab | Viraj Gandhi</title><link rel="stylesheet" href="../../assets/style.css"></head><body><nav><div class="wrap"><strong>VG / DATA</strong><div><a href="../../index.html">All projects</a><a href="../../README.md">GitHub README</a></div></div></nav><main class="project-main"><header class="project-head"><a class="back" href="../../index.html">← All projects</a><div class="eyebrow" style="margin-top:29px">Portfolio extension · Unsupervised learning</div><h1>Clustering comparison lab</h1><p class="lead">A new, AI-assisted demonstration applying k-means, hierarchical clustering, DBSCAN and Gaussian mixtures to the same 640-point synthetic dataset. This is not a graded assignment.</p><div class="tools"><span class="pill">K-means</span><span class="pill">Hierarchical</span><span class="pill">DBSCAN</span><span class="pill">Mixture models</span></div></header><div class="actions"><a class="action" href="clustering_in_r.R">View project code ↗</a><a class="action alt" href="README.md">Technical notes ↗</a></div><figure><img src="clustering_preview.png" alt="Comparison of four clustering algorithms"><figcaption>Comparison of four clustering algorithms</figcaption></figure><section class="details"><h2>What this demonstrates</h2><ul><li>Evaluates agreement with known synthetic groups using Adjusted Rand Index.</li><li>Shows DBSCAN labelling outliers as noise.</li><li>Compares approaches using a consistent dataset and saves outputs.</li></ul></section><h2>Code preview</h2><p>First 34 lines shown. Open the full script above for everything.</p><pre class="codepreview"><code># Clustering methods — portfolio extension, not an assessed assignment.
+# Based on topics in DATA202 Weeks 11–12 (course demonstration files are not personal code).
+# This standalone implementation was prepared with AI assistance.
+# Run from THIS project folder: source(&quot;clustering_in_r.R&quot;)
+# Install once: install.packages(c(&quot;dbscan&quot;, &quot;mclust&quot;))
+
+if (!requireNamespace(&quot;dbscan&quot;, quietly = TRUE) ||
+    !requireNamespace(&quot;mclust&quot;, quietly = TRUE)) {
+  stop(&quot;Install packages: install.packages(c(&#x27;dbscan&#x27;, &#x27;mclust&#x27;))&quot;)
+}
+
+points &lt;- read.csv(&quot;synthetic_clusters.csv&quot;)
+stopifnot(all(c(&quot;x&quot;, &quot;y&quot;, &quot;true_group&quot;) %in% names(points)))
+features &lt;- as.matrix(points[, c(&quot;x&quot;, &quot;y&quot;)])
+truth &lt;- points$true_group
+set.seed(42)
+
+# 1. K-means: multiple random starts reduce poor local solutions.
+km &lt;- kmeans(features, centers = 4, nstart = 30, iter.max = 100)
+
+# 2. Hierarchical: Ward&#x27;s method merges clusters to minimise within-group variation.
+hierarchy &lt;- hclust(dist(features), method = &quot;ward.D2&quot;)
+ward_labels &lt;- cutree(hierarchy, k = 4)
+
+# 3. DBSCAN: density-based clustering; label 0 denotes a noise observation.
+density &lt;- dbscan::dbscan(features, eps = 0.72, minPts = 8)
+
+# 4. Model-based: Gaussian mixture model with four mixture components.
+mixture &lt;- mclust::Mclust(features, G = 4, verbose = FALSE)
+
+# Adjusted Rand Index compares partition agreement regardless of label numbering.
+methods &lt;- list(
+  &quot;K-means&quot; = km$cluster,
+  &quot;Hierarchical (Ward)&quot; = ward_labels,</code></pre><p class="warning">This is a new AI-assisted portfolio extension inspired by Weeks 11–12; the chart preview was calculated in Python. The R implementation is separate and has not been run in the packaging environment.</p></main><footer><div class="wrap"><a href="../../index.html">← Return to all five projects</a></div></footer></body></html>
