@@ -1,5 +1,0 @@
-method,clusters_found,noise_points,adjusted_rand_index_preview
-K-means,4,0,0.959
-Hierarchical (Ward),4,0,0.975
-DBSCAN,4,41,0.912
-Gaussian mixtures,4,0,0.992
