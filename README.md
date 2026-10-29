@@ -2,9 +2,9 @@
 
 **R · SQL · Data visualisation · Probability · Clustering**
 
-A selection of projects from my DATA202 coursework at **Victoria University of Wellington (2026)**. Each project has a visual result, a short explanation and the code used in the analysis.
+A selection of projects 
+Each project has a visual result, a short explanation and the code used in the analysis.
 
-**Academic results:** I received **100% on Assignments 1, 2 and 3** (self-reported; grade records are not published here).
 
 ## Projects
 
